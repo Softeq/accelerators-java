@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id 'net.ltgt.apt' version '0.20'
+	id 'checkstyle'
 }
 
 group = 'com.softeq'
@@ -50,6 +51,10 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+}
+
+checkstyle {
+	configFile file('gradle/checkstyle/oracle_checks.xml')
 }
 
 test {

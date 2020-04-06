@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
     private UserMapper userMapper;
 
-    public UserServiceImpl(UserRepo userRepo, UserMapper userMapper) {
-        this.userRepo = userRepo;
-        this.userMapper = userMapper;
+    public UserServiceImpl(UserRepo userRepoInject, UserMapper userMapperInject) {
+        this.userRepo = userRepoInject;
+        this.userMapper = userMapperInject;
     }
 
     @Override
