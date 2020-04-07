@@ -46,12 +46,12 @@ public class SwaggerConfig {
         List<ResponseMessage> reportErrors = List.of(internalError, authError, formatError);
 
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .useDefaultResponseMessages(false)
-                .globalResponseMessage(RequestMethod.GET, challengeErrors)
-                .globalResponseMessage(RequestMethod.POST, reportErrors)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.lenovo.rhas.controller"))
+            .apiInfo(apiInfo())
+            .useDefaultResponseMessages(false)
+            .globalResponseMessage(RequestMethod.GET, challengeErrors)
+            .globalResponseMessage(RequestMethod.POST, reportErrors)
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.softeq.accelerator.flyway.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

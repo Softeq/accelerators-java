@@ -15,4 +15,6 @@ import java.util.List;
 public interface UserService {
 
     List<UserDto> getAll();
+
+    UserDto getById(Integer id);
 }
