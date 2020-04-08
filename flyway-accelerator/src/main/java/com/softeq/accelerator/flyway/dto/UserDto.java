@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * User representation for API
@@ -27,4 +28,6 @@ public class UserDto {
     private String email;
     private String firstName;
     private String lastName;
+
+    private List<AssessmentDto> assessments;
 }
