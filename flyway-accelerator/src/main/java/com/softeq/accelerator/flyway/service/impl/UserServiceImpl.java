@@ -1,5 +1,6 @@
 package com.softeq.accelerator.flyway.service.impl;
 
+import com.softeq.accelerator.flyway.dto.CreateUserDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
 import com.softeq.accelerator.flyway.entity.User;
 import com.softeq.accelerator.flyway.exception.ResourceNotFoundException;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(UserDto request) {
+    public UserDto createUser(CreateUserDto request) {
         User user = userMapper.toEntity(request);
         return userMapper.toDto(userRepo.save(user));
     }

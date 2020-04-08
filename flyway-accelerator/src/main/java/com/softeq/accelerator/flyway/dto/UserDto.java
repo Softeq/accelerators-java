@@ -1,5 +1,6 @@
 package com.softeq.accelerator.flyway.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +23,7 @@ import java.util.List;
 @Setter
 @ToString
 @EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
     private Integer id;
     @NotNull
@@ -29,5 +32,5 @@ public class UserDto {
     private String firstName;
     private String lastName;
 
-    private List<AssessmentDto> assessments;
+    private List<AssessmentDto> assessments = new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package com.softeq.accelerator.flyway.integration;
 
 import com.softeq.accelerator.flyway.TestWebApplication;
+import com.softeq.accelerator.flyway.dto.CreateUserDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,6 +22,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 /**
  * Tests User related logic
@@ -67,5 +70,21 @@ public class UserTest extends AbstractIntegrationTest {
         UserDto user = response.getBody();
         assertNotNull(user);
         assertEquals(Integer.valueOf(1), user.getId());
+    }
+
+    @Test
+    public void testCreateUserOk() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        CreateUserDto request = new CreateUserDto();
+        request.setEmail("some@email.test.com");
+        request.setFirstName("FFF");
+        request.setLastName("LLL");
+        ResponseEntity<String> response = template
+            .exchange(base + contextPath + "/api/v1/users",
+                POST, new HttpEntity<>(request, headers), String.class);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 }

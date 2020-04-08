@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,13 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
- * Represents assessment from DB
+ * Represents feedback from DB
  * <p/>
  * Created on 4/8/2020.
  * <p/>
@@ -28,26 +26,33 @@ import java.util.List;
  * @author slapitsky
  */
 @Entity
-@Table(name = "assessment")
+@Table(name = "feedback")
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Assessment {
+public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "target_user_id")
-    private User targetUser;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "assesment_date")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "assessment_id")
+    private Assessment assessment;
+
+    @Column(name = "feedback_date")
     private LocalDateTime assesmentDate;
 
-    @OneToMany(mappedBy = "assessment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Feedback> feedbacks;
+    @Column(name = "score")
+    private BigDecimal score;
+
+    @Column(name = "comment")
+    private String comment;
 
 }

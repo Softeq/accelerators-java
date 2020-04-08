@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
- * Assessment representation for API
+ * Feedback representation for API
  * <p/>
  * Created on 4/8/2020.
  * <p/>
@@ -20,14 +20,18 @@ import java.util.List;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class AssessmentDto {
+public class FeedbackDto {
 
     private Integer id;
 
-    private UserDto targetUser;
+    private UserDto user;
 
-    private List<FeedbackDto> feedbacks;
+    private AssessmentDto assessment;
 
     private LocalDateTime assesmentDate;
+
+    private BigDecimal score;
+
+    private String comment;
 
 }

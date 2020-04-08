@@ -1,5 +1,6 @@
 package com.softeq.accelerator.flyway.service;
 
+import com.softeq.accelerator.flyway.dto.CreateUserDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
 
 import java.util.List;
@@ -35,5 +36,5 @@ public interface UserService {
      * @param request DTO with the new user fields
      * @return created user DTO
      */
-    UserDto createUser(UserDto request);
+    UserDto createUser(CreateUserDto request);
 }
