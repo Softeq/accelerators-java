@@ -1,4 +1,4 @@
 insert into users
 (first_name, last_name, email, status)
 values
-('Admin', 'Admin', 'default.admin@default.admin.com', 'ACTIVE');
+('${defaultUser}', '${defaultUser}', 'default.admin@default.admin.com', 'ACTIVE');
