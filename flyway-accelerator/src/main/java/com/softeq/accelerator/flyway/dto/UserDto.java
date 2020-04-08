@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * User representation for API
  * <p/>
@@ -19,6 +22,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class UserDto {
     private Integer id;
+    @NotNull
+    @NotEmpty
     private String email;
     private String firstName;
     private String lastName;
