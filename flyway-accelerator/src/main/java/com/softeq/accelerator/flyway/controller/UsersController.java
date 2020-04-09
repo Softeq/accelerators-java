@@ -1,3 +1,10 @@
+/*
+ *
+ *  * Developed by Softeq Development Corporation
+ *  * http://www.softeq.com
+ *
+ */
+
 package com.softeq.accelerator.flyway.controller;
 
 import com.softeq.accelerator.flyway.dto.CreateUserDto;

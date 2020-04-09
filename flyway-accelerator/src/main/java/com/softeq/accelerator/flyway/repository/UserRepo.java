@@ -1,3 +1,10 @@
+/*
+ *
+ *  * Developed by Softeq Development Corporation
+ *  * http://www.softeq.com
+ *
+ */
+
 package com.softeq.accelerator.flyway.repository;
 
 import com.softeq.accelerator.flyway.entity.User;
@@ -18,11 +25,11 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepo extends CrudRepository<User, Integer> {
 
     @Query("select u "
-            + " from User u  "
-            + " where  "
-            + "     (:firstName is null or u.firstName like %:firstName% )  "
-            + " and (:lastName is null or u.lastName like %:lastName% )"
-            + " and (:email is null or u.email like %:email% )")
+        + " from User u  "
+        + " where  "
+        + "     (:firstName is null or u.firstName like %:firstName% )  "
+        + " and (:lastName is null or u.lastName like %:lastName% )"
+        + " and (:email is null or u.email like %:email% )")
     Page<User> search(@Param("firstName") String firstName,
                       @Param("lastName") String lastName,
                       @Param("email") String email,

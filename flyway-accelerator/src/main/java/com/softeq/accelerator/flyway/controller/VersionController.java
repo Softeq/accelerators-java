@@ -1,3 +1,10 @@
+/*
+ *
+ *  * Developed by Softeq Development Corporation
+ *  * http://www.softeq.com
+ *
+ */
+
 package com.softeq.accelerator.flyway.controller;
 
 import lombok.extern.slf4j.Slf4j;

@@ -1,3 +1,10 @@
+/*
+ *
+ *  * Developed by Softeq Development Corporation
+ *  * http://www.softeq.com
+ *
+ */
+
 package com.softeq.accelerator.flyway.controller.advice;
 
 import com.softeq.accelerator.flyway.exception.ResourceNotFoundException;

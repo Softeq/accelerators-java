@@ -1,3 +1,10 @@
+/*
+ *
+ *  * Developed by Softeq Development Corporation
+ *  * http://www.softeq.com
+ *
+ */
+
 package com.softeq.accelerator.flyway.integration;
 
 import com.softeq.accelerator.flyway.TestWebApplication;

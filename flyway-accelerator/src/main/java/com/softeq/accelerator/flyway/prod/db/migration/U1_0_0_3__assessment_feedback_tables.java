@@ -1,3 +1,10 @@
+/*
+ *
+ *  * Developed by Softeq Development Corporation
+ *  * http://www.softeq.com
+ *
+ */
+
 package com.softeq.accelerator.flyway.prod.db.migration;
 
 import org.flywaydb.core.api.migration.BaseJavaMigration;
