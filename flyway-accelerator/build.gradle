@@ -59,6 +59,11 @@ checkstyle {
 	configFile file('gradle/checkstyle/oracle_checks.xml')
 }
 
+// Migration java classes have version specific names so we need to exclude them from the check
+tasks.withType(Checkstyle) {
+	exclude '/com/softeq/accelerator/flyway/prod/db/migration/**'
+}
+
 test {
 	useJUnitPlatform()
 }
