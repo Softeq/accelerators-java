@@ -14,6 +14,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Maps user related objects
@@ -24,24 +25,32 @@ import java.util.List;
  * @author slapitsky
  */
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public abstract class UserMapper {
+
     @Mapping(target = "id", source = "dto.id")
     @Mapping(target = "email", source = "dto.email")
     @Mapping(target = "firstName", source = "dto.firstName")
     @Mapping(target = "lastName", source = "dto.lastName")
-    User toEntity(UserDto dto);
+    public abstract User toEntity(UserDto dto);
 
     @Mapping(target = "email", source = "dto.email")
     @Mapping(target = "firstName", source = "dto.firstName")
     @Mapping(target = "lastName", source = "dto.lastName")
-    User toEntity(CreateUserDto dto);
+    public abstract User toEntity(CreateUserDto dto);
 
     @Mapping(target = "id", source = "user.id")
     @Mapping(target = "email", source = "user.email")
     @Mapping(target = "firstName", source = "user.firstName")
     @Mapping(target = "lastName", source = "user.lastName")
-//    @Mapping(target = "assessments", source = "java(toAssessmentDtoList(user.getAssessments()))")
-    UserDto toDto(User user);
+    @Mapping(target = "assessments", expression = "java( toAssessmentDtoList(user.getAssessments()) )")
+    public abstract UserDto toDto(User user);
 
-    List<AssessmentDto> toAssessmentDtoList(List<Assessment> assessmens);
+    public abstract AssessmentDto toAssessmentDto(Assessment assessment);
+
+    public List<AssessmentDto> toAssessmentDtoList(List<Assessment> assessments) {
+        if (assessments == null) {
+            return null;
+        }
+        return assessments.stream().map(this::toAssessmentDto).collect(Collectors.toList());
+    }
 }
