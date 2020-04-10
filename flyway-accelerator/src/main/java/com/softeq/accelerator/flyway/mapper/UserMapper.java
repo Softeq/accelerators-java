@@ -12,7 +12,9 @@ import com.softeq.accelerator.flyway.entity.Assessment;
 import com.softeq.accelerator.flyway.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,11 +47,18 @@ public abstract class UserMapper {
     @Mapping(target = "assessments", expression = "java( toAssessmentDtoList(user.getAssessments()) )")
     public abstract UserDto toDto(User user);
 
+    @Mapping(target = "id", source = "shortUser.id")
+    @Mapping(target = "email", source = "shortUser.email")
+    @Mapping(target = "firstName", source = "shortUser.firstName")
+    @Mapping(target = "lastName", source = "shortUser.lastName")
+    @Named("shortUser")
+    public abstract UserDto toShortDto(User shortUser);
+
     public abstract AssessmentDto toAssessmentDto(Assessment assessment);
 
     public List<AssessmentDto> toAssessmentDtoList(List<Assessment> assessments) {
         if (assessments == null) {
-            return null;
+            return Collections.emptyList();
         }
         return assessments.stream().map(this::toAssessmentDto).collect(Collectors.toList());
     }

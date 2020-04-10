@@ -34,13 +34,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAll() {
         return StreamSupport.stream(userRepo.findAll().spliterator(), false)
-            .map(user -> userMapper.toDto(user))
+            .map(user -> userMapper.toShortDto(user))
             .collect(Collectors.toList());
     }
 
     @Override
     public UserDto getById(Integer id) {
-        return userRepo.findById(id)
+        return userRepo.getById(id)
             .map(user -> userMapper.toDto(user))
             .orElseThrow(() -> new ResourceNotFoundException("User not found", null));
     }

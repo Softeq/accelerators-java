@@ -5,10 +5,7 @@
 
 package com.softeq.accelerator.flyway.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,10 +29,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "feedback")
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
 public class Feedback {
 
     @Id

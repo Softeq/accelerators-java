@@ -7,9 +7,7 @@ package com.softeq.accelerator.flyway.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -22,9 +20,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author slapitsky
  */
-@Getter
-@Setter
-@ToString
+@Data
 @ApiModel
 public class CreateUserDto {
 

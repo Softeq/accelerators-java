@@ -5,10 +5,7 @@
 
 package com.softeq.accelerator.flyway.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,10 +18,7 @@ import java.time.LocalDateTime;
  *
  * @author slapitsky
  */
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
 public class FeedbackDto {
 
     private Integer id;

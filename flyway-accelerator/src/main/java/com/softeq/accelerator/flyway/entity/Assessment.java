@@ -5,10 +5,7 @@
 
 package com.softeq.accelerator.flyway.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,10 +31,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "assessment")
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
 public class Assessment {
 
     @Id
