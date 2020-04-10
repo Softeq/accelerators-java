@@ -1,8 +1,6 @@
 /*
- *
- *  * Developed by Softeq Development Corporation
- *  * http://www.softeq.com
- *
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
  */
 
 package com.softeq.accelerator.flyway.controller;
