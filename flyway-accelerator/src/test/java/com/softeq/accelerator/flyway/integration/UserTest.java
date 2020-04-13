@@ -7,6 +7,8 @@ package com.softeq.accelerator.flyway.integration;
 
 import com.softeq.accelerator.flyway.TestWebApplication;
 import com.softeq.accelerator.flyway.dto.CreateUserDto;
+import com.softeq.accelerator.flyway.dto.PageDto;
+import com.softeq.accelerator.flyway.dto.SearchUserRequestDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -91,5 +93,25 @@ public class UserTest extends AbstractIntegrationTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
+    }
+
+    @Test
+    public void testSearchUsersOk() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        SearchUserRequestDto request = new SearchUserRequestDto();
+        request.setEmail("default.admin");
+        request.setPage(0);
+        request.setSize(20);
+        request.setSort("email");
+        request.setSortOrder("DESC");
+        ResponseEntity<PageDto<UserDto>> response = template
+            .exchange(base + contextPath + "/api/v1/users/search",
+                POST, new HttpEntity<>(request, headers), new ParameterizedTypeReference<PageDto<UserDto>>() {
+                });
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().getNumberOfElements());
     }
 }

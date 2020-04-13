@@ -6,7 +6,9 @@
 package com.softeq.accelerator.flyway.service;
 
 import com.softeq.accelerator.flyway.dto.CreateUserDto;
+import com.softeq.accelerator.flyway.dto.SearchUserRequestDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -42,4 +44,12 @@ public interface UserService {
      * @return created user DTO
      */
     UserDto createUser(CreateUserDto request);
+
+    /**
+     * Searches users
+     *
+     * @param request searh request fields
+     * @return
+     */
+    Page<UserDto> search(SearchUserRequestDto request);
 }

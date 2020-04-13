@@ -6,6 +6,7 @@
 package com.softeq.accelerator.flyway.service.impl;
 
 import com.softeq.accelerator.flyway.dto.CreateUserDto;
+import com.softeq.accelerator.flyway.dto.SearchUserRequestDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
 import com.softeq.accelerator.flyway.entity.User;
 import com.softeq.accelerator.flyway.exception.ResourceNotFoundException;
@@ -13,6 +14,7 @@ import com.softeq.accelerator.flyway.mapper.UserMapper;
 import com.softeq.accelerator.flyway.repository.UserRepo;
 import com.softeq.accelerator.flyway.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,5 +54,14 @@ public class UserServiceImpl implements UserService {
         UserDto created = userMapper.toDto(userRepo.save(user));
         log.info("Create user finished");
         return created;
+    }
+
+    @Override
+    public Page<UserDto> search(SearchUserRequestDto request) {
+        return userRepo.search(request.getFirstName(),
+            request.getLastName(),
+            request.getEmail(),
+            request.getPageRequest())
+            .map(user -> userMapper.toDto(user));
     }
 }
