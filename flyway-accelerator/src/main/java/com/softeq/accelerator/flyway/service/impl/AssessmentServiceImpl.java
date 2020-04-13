@@ -30,6 +30,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
     @Override
     public List<AssessmentDto> getAll() {
+        log.info("Get all assessments");
         return StreamSupport.stream(assessmentRepo.findAll().spliterator(), false)
             .map(a -> assessmentMapper.toDto(a))
             .collect(Collectors.toList());

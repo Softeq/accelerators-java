@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAll() {
+        log.info("Get all users");
         return StreamSupport.stream(userRepo.findAll().spliterator(), false)
             .map(user -> userMapper.toShortDto(user))
             .collect(Collectors.toList());
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getById(Integer id) {
+        log.info("Find user by id");
         return userRepo.getById(id)
             .map(user -> userMapper.toDto(user))
             .orElseThrow(() -> new ResourceNotFoundException("User not found", null));
@@ -58,6 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<UserDto> search(SearchUserRequestDto request) {
+        log.info("Search user");
         return userRepo.search(request.getFirstName(),
             request.getLastName(),
             request.getEmail(),
