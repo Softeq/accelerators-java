@@ -10,7 +10,6 @@ import com.softeq.accelerator.flyway.dto.CreateUserDto;
 import com.softeq.accelerator.flyway.dto.PageDto;
 import com.softeq.accelerator.flyway.dto.SearchUserRequestDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,11 +42,6 @@ import static org.springframework.http.HttpMethod.POST;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {TestWebApplication.class})
 @Profile(TestWebApplication.INTEGRATION_TEST_PROFILE)
 public class UserTest extends AbstractIntegrationTest {
-
-    @Before
-    public void setUp() {
-        this.base = "http://localhost:" + port;
-    }
 
     @Test
     public void testGetAllUsersOk() {
