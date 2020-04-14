@@ -41,7 +41,7 @@ public class MapperTest {
 
         Assessment a = new Assessment();
         LocalDateTime date = LocalDateTime.now();
-        a.setAssesmentDate(date);
+        a.setAssessmentDate(date);
         u.setAssessments(Collections.singletonList(a));
 
         UserDto converted = mapper.toDto(u);
@@ -49,6 +49,6 @@ public class MapperTest {
         assertEquals(u.getLastName(), converted.getLastName());
         assertEquals(u.getEmail(), converted.getEmail());
         assertEquals(u.getAssessments().size(), converted.getAssessments().size());
-        assertEquals(u.getAssessments().get(0).getAssesmentDate(), converted.getAssessments().get(0).getAssesmentDate());
+        assertEquals(u.getAssessments().get(0).getAssessmentDate(), converted.getAssessments().get(0).getAssessmentDate());
     }
 }

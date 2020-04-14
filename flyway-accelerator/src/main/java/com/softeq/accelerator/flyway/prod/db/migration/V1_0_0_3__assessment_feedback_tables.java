@@ -33,7 +33,7 @@ public class V1_0_0_3__assessment_feedback_tables extends BaseJavaMigration {
         "CREATE TABLE feedback (\n" +
         "    id int NOT NULL DEFAULT nextval('feedback_id_seq') PRIMARY KEY,\n" +
         "    user_id int,\n" +
-        "    assesment_id int,\n" +
+        "    assessment_id int,\n" +
         "    feedback_date timestamp,\n" +
         "    score decimal(2,2),\n" +
         "    comment varchar (1024)\n" +
@@ -41,7 +41,7 @@ public class V1_0_0_3__assessment_feedback_tables extends BaseJavaMigration {
         " ALTER SEQUENCE feedback_id_seq OWNED BY feedback.id;\n" +
         "\n" +
         "alter table feedback add constraint fk_feedback_users__user_id foreign key (user_id) references users (id);\n" +
-        "alter table feedback add constraint fk_feedback_assessment__assesment_id foreign key (assesment_id) references assessment (id);";
+        "alter table feedback add constraint fk_feedback_assessment__assesment_id foreign key (assessment_id) references assessment (id);";
 
     public void migrate(Context context) throws Exception {
         try (Statement update = context.getConnection().createStatement()) {

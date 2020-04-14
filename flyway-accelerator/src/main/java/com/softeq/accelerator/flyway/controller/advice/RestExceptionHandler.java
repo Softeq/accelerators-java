@@ -44,13 +44,12 @@ public class RestExceptionHandler {
 
     private ResponseEntity<String> handleInternal(Exception ex, WebRequest request, HttpStatus status) {
         String description = request.getDescription(true);
-        String msg = String.format("Failed to process request [%s]. ", description);
         if (log.isTraceEnabled()) {
-            log.trace("{} Cause:", msg, ex);
+            log.trace("Failed to process request {} Cause:", description, ex);
         } else if (log.isDebugEnabled()) {
-            log.debug("{} Cause: {}", msg, ex.toString());
+            log.debug("Failed to process request {} Cause: {}", description, ex.toString());
         } else {
-            log.warn(msg);
+            log.warn("Failed to process request {}", description);
         }
         return new ResponseEntity<>(ex.getMessage(), status);
     }

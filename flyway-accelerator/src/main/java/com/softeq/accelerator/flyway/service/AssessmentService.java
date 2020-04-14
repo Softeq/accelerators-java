@@ -6,6 +6,7 @@
 package com.softeq.accelerator.flyway.service;
 
 import com.softeq.accelerator.flyway.dto.AssessmentDto;
+import com.softeq.accelerator.flyway.dto.CreateAssessmentDto;
 
 import java.util.List;
 
@@ -25,4 +26,12 @@ public interface AssessmentService {
      * @return assessments list
      */
     List<AssessmentDto> getAll();
+
+    /**
+     * CReates a new assessment
+     *
+     * @param request
+     * @return
+     */
+    AssessmentDto createAssessment(CreateAssessmentDto request);
 }

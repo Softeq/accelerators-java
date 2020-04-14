@@ -6,8 +6,10 @@
 package com.softeq.accelerator.flyway.mapper;
 
 import com.softeq.accelerator.flyway.dto.AssessmentDto;
+import com.softeq.accelerator.flyway.dto.CreateAssessmentDto;
 import com.softeq.accelerator.flyway.entity.Assessment;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Maps assessment related objects
@@ -22,5 +24,8 @@ public abstract class AssessmentMapper {
 
     public abstract Assessment toEntity(AssessmentDto dto);
 
+    public abstract Assessment toEntity(CreateAssessmentDto dto);
+
+    @Mapping(target = "targetUser", ignore = true)
     public abstract AssessmentDto toDto(Assessment assessment);
 }

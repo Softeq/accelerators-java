@@ -54,6 +54,8 @@ public abstract class UserMapper {
     @Named("shortUser")
     public abstract UserDto toShortDto(User shortUser);
 
+    @Mapping(target = "targetUser", ignore = true)
+    @Mapping(target = "assessmentDate", source = "assessment.assessmentDate")
     public abstract AssessmentDto toAssessmentDto(Assessment assessment);
 
     public List<AssessmentDto> toAssessmentDtoList(List<Assessment> assessments) {

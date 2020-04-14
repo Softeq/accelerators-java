@@ -44,7 +44,7 @@ public class Assessment {
     private User targetUser;
 
     @Column(name = "assesment_date")
-    private LocalDateTime assesmentDate;
+    private LocalDateTime assessmentDate;
 
     @OneToMany(mappedBy = "assessment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Feedback> feedbacks;
