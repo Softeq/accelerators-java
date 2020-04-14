@@ -1,3 +1,8 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.controller.advice;
 
 import com.softeq.accelerator.flyway.exception.ResourceNotFoundException;
@@ -39,13 +44,12 @@ public class RestExceptionHandler {
 
     private ResponseEntity<String> handleInternal(Exception ex, WebRequest request, HttpStatus status) {
         String description = request.getDescription(true);
-        String msg = String.format("Failed to process request [%s].", description);
         if (log.isTraceEnabled()) {
-            log.trace(msg + " Cause:", ex);
+            log.trace("Failed to process request {} Cause:", description, ex);
         } else if (log.isDebugEnabled()) {
-            log.debug(msg + " Cause: {}", ex.toString());
+            log.debug("Failed to process request {} Cause: {}", description, ex.toString());
         } else {
-            log.warn(msg);
+            log.warn("Failed to process request {}", description);
         }
         return new ResponseEntity<>(ex.getMessage(), status);
     }

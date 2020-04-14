@@ -1,3 +1,8 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.config;
 
 import org.springframework.context.annotation.Bean;
@@ -30,17 +35,17 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         ResponseMessage internalError = new ResponseMessageBuilder()
-                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                .build();
+            .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+            .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+            .build();
         ResponseMessage authError = new ResponseMessageBuilder()
-                .code(HttpStatus.FORBIDDEN.value())
-                .message(HttpStatus.FORBIDDEN.getReasonPhrase())
-                .build();
+            .code(HttpStatus.FORBIDDEN.value())
+            .message(HttpStatus.FORBIDDEN.getReasonPhrase())
+            .build();
         ResponseMessage formatError = new ResponseMessageBuilder()
-                .code(HttpStatus.UNPROCESSABLE_ENTITY.value())
-                .message(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase())
-                .build();
+            .code(HttpStatus.UNPROCESSABLE_ENTITY.value())
+            .message(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase())
+            .build();
 
         List<ResponseMessage> challengeErrors = List.of(internalError);
         List<ResponseMessage> reportErrors = List.of(internalError, authError, formatError);
@@ -52,15 +57,15 @@ public class SwaggerConfig {
             .globalResponseMessage(RequestMethod.POST, reportErrors)
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.softeq.accelerator.flyway.controller"))
-                .paths(PathSelectors.any())
-                .build();
+            .paths(PathSelectors.any())
+            .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Softeq Flyway accelerator REST API")
-                .description("Softeq Flyway accelerator REST API")
-                .version("1.0")
-                .build();
+            .title("Softeq Flyway accelerator REST API")
+            .description("Softeq Flyway accelerator REST API")
+            .version("1.0")
+            .build();
     }
 }

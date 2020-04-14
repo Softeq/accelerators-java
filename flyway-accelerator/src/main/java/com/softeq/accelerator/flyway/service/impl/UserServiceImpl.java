@@ -1,6 +1,12 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.service.impl;
 
 import com.softeq.accelerator.flyway.dto.CreateUserDto;
+import com.softeq.accelerator.flyway.dto.SearchUserRequestDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
 import com.softeq.accelerator.flyway.entity.User;
 import com.softeq.accelerator.flyway.exception.ResourceNotFoundException;
@@ -8,6 +14,7 @@ import com.softeq.accelerator.flyway.mapper.UserMapper;
 import com.softeq.accelerator.flyway.repository.UserRepo;
 import com.softeq.accelerator.flyway.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,21 +35,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAll() {
+        log.info("Get all users");
         return StreamSupport.stream(userRepo.findAll().spliterator(), false)
-            .map(user -> userMapper.toDto(user))
+            .map(user -> userMapper.toShortDto(user))
             .collect(Collectors.toList());
     }
 
     @Override
     public UserDto getById(Integer id) {
-        return userRepo.findById(id)
+        log.info("Find user by id");
+        return userRepo.getById(id)
             .map(user -> userMapper.toDto(user))
             .orElseThrow(() -> new ResourceNotFoundException("User not found", null));
     }
 
     @Override
     public UserDto createUser(CreateUserDto request) {
+        log.info("Create user started");
         User user = userMapper.toEntity(request);
-        return userMapper.toDto(userRepo.save(user));
+        UserDto created = userMapper.toDto(userRepo.save(user));
+        log.info("Create user finished");
+        return created;
+    }
+
+    @Override
+    public Page<UserDto> search(SearchUserRequestDto request) {
+        log.info("Search user");
+        return userRepo.search(request.getFirstName(),
+            request.getLastName(),
+            request.getEmail(),
+            request.getPageRequest())
+            .map(user -> userMapper.toDto(user));
     }
 }

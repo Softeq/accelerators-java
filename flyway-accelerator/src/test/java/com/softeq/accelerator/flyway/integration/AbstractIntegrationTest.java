@@ -1,5 +1,11 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.integration;
 
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -25,4 +31,9 @@ public abstract class AbstractIntegrationTest {
 
     @Autowired
     protected TestRestTemplate template;
+
+    @Before
+    public void setUp() {
+        this.base = "http://localhost:" + port;
+    }
 }

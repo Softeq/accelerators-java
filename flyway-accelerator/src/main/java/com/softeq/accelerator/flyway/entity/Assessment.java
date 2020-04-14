@@ -1,9 +1,11 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,10 +31,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "assessment")
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
 public class Assessment {
 
     @Id
@@ -45,7 +44,7 @@ public class Assessment {
     private User targetUser;
 
     @Column(name = "assesment_date")
-    private LocalDateTime assesmentDate;
+    private LocalDateTime assessmentDate;
 
     @OneToMany(mappedBy = "assessment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Feedback> feedbacks;

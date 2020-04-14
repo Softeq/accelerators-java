@@ -1,3 +1,8 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.repository;
 
 import com.softeq.accelerator.flyway.entity.Assessment;

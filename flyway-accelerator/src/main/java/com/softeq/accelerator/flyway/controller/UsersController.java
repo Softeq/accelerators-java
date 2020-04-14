@@ -1,6 +1,12 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.controller;
 
 import com.softeq.accelerator.flyway.dto.CreateUserDto;
+import com.softeq.accelerator.flyway.dto.SearchUserRequestDto;
 import com.softeq.accelerator.flyway.dto.UserDto;
 import com.softeq.accelerator.flyway.service.UserService;
 import io.swagger.annotations.Api;
@@ -9,6 +15,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +54,15 @@ public class UsersController {
     })
     public ResponseEntity<List<UserDto>> getAll() {
         return ResponseEntity.ok().body(userService.getAll());
+    }
+
+    @PostMapping("/search")
+    @ApiOperation(value = "Search users.", response = UserDto.class, responseContainer = "Page")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Successfully retrieved users.")
+    })
+    public ResponseEntity<Page<UserDto>> search(@RequestBody @Valid SearchUserRequestDto searchRequest) {
+        return ResponseEntity.ok().body(userService.search(searchRequest));
     }
 
     @GetMapping("/{userId}")

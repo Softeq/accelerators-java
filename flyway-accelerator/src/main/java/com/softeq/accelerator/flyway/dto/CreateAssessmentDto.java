@@ -5,28 +5,22 @@
 
 package com.softeq.accelerator.flyway.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
- * Assessment representation for API
+ * Assessment creation request representation for API.
  * <p/>
- * Created on 4/8/2020.
+ * Created on 4/13/2020.
  * <p/>
  *
  * @author slapitsky
  */
 @Data
-public class AssessmentDto {
-
-    private Integer id;
-
-    private UserDto targetUser;
-
-    private List<FeedbackDto> feedbacks;
-
+@ApiModel
+public class CreateAssessmentDto {
     private LocalDateTime assessmentDate;
-
+    private Integer userId;
 }

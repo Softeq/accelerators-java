@@ -1,10 +1,12 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,10 +21,7 @@ import java.util.List;
  *
  * @author slapitsky
  */
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
     private Integer id;
