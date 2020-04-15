@@ -5,6 +5,7 @@
 
 package com.softeq.accelerator.flyway.service;
 
+import com.softeq.accelerator.flyway.dto.CreateFeedbackDto;
 import com.softeq.accelerator.flyway.dto.FeedbackDto;
 
 import java.util.List;
@@ -25,4 +26,12 @@ public interface FeedbackService {
      * @return feedback list
      */
     List<FeedbackDto> getAll();
+
+    /**
+     * Creates a feedback
+     *
+     * @param request
+     * @return
+     */
+    FeedbackDto createFeedback(CreateFeedbackDto request);
 }

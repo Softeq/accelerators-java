@@ -5,6 +5,7 @@
 
 package com.softeq.accelerator.flyway.controller;
 
+import com.softeq.accelerator.flyway.dto.CreateFeedbackDto;
 import com.softeq.accelerator.flyway.dto.FeedbackDto;
 import com.softeq.accelerator.flyway.service.FeedbackService;
 import io.swagger.annotations.Api;
@@ -14,9 +15,12 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -46,5 +50,14 @@ public class FeedbackController {
     })
     public ResponseEntity<List<FeedbackDto>> getAll() {
         return ResponseEntity.ok().body(feedbackService.getAll());
+    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    @ApiOperation(value = "Create a feedback.")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Successfully created feedback.")
+    })
+    public ResponseEntity<FeedbackDto> createFeedback(@RequestBody @Valid CreateFeedbackDto request) {
+        return ResponseEntity.ok().body(feedbackService.createFeedback(request));
     }
 }

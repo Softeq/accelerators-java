@@ -12,7 +12,7 @@ CREATE TABLE feedback (
     user_id int,
     assessment_id int,
     feedback_date datetime,
-    score decimal(2,2),
+    score decimal(5,2),
     comment varchar (1024)
 );
 
