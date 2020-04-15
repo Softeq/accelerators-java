@@ -20,12 +20,12 @@ import org.mapstruct.Mapping;
  * @author slapitsky
  */
 @Mapper(componentModel = "spring")
-public abstract class AssessmentMapper {
+public interface AssessmentMapper {
 
-    public abstract Assessment toEntity(AssessmentDto dto);
+    Assessment toEntity(AssessmentDto dto);
 
-    public abstract Assessment toEntity(CreateAssessmentDto dto);
+    Assessment toEntity(CreateAssessmentDto dto);
 
     @Mapping(target = "targetUser", ignore = true)
-    public abstract AssessmentDto toDto(Assessment assessment);
+    AssessmentDto toDto(Assessment assessment);
 }

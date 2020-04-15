@@ -20,13 +20,16 @@ import org.mapstruct.Mapping;
  * @author slapitsky
  */
 @Mapper(componentModel = "spring")
-public abstract class FeedbackMapper {
+public interface FeedbackMapper {
 
-    @Mapping(target = "user", ignore = true)
-    @Mapping(target = "assessment", ignore = true)
-    public abstract FeedbackDto toDto(Feedback feedback);
+    @Mapping(target = "user", expression = "java(null)")
+    @Mapping(target = "assessment", expression = "java(null)")
+    @Mapping(target = "feedbackDate", source = "feedback.feedbackDate")
+    @Mapping(target = "id", source = "feedback.id")
+    FeedbackDto toDto(Feedback feedback);
 
-    public abstract Feedback toEntity(FeedbackDto dto);
+    @Mapping(target = "feedbackDate", source = "dto.feedbackDate")
+    Feedback toEntity(FeedbackDto dto);
 
-    public abstract Feedback toEntity(CreateFeedbackDto dto);
+    Feedback toEntity(CreateFeedbackDto dto);
 }

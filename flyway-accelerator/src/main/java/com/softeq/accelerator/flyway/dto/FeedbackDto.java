@@ -27,7 +27,7 @@ public class FeedbackDto {
 
     private AssessmentDto assessment;
 
-    private LocalDateTime assesmentDate;
+    private LocalDateTime feedbackDate;
 
     private BigDecimal score;
 
