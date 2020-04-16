@@ -7,6 +7,7 @@ package com.softeq.accelerator.flyway.service.impl;
 
 import com.softeq.accelerator.flyway.dto.AssessmentDto;
 import com.softeq.accelerator.flyway.dto.CreateAssessmentDto;
+import com.softeq.accelerator.flyway.dto.FeedbackDto;
 import com.softeq.accelerator.flyway.entity.Assessment;
 import com.softeq.accelerator.flyway.entity.User;
 import com.softeq.accelerator.flyway.exception.ResourceNotFoundException;
@@ -17,7 +18,10 @@ import com.softeq.accelerator.flyway.service.AssessmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -55,5 +59,26 @@ public class AssessmentServiceImpl implements AssessmentService {
         AssessmentDto created = assessmentMapper.toDto(assessmentRepo.save(assessment));
         log.info("Create Assessment finished");
         return created;
+    }
+
+    @Override
+    public AssessmentDto getById(Integer id) {
+        log.info("Find assessment by id");
+        AssessmentDto result = assessmentRepo.findById(id)
+            .map(assessment -> assessmentMapper.toDto(assessment))
+            .orElseThrow(() -> new ResourceNotFoundException("Assessment not found", null));
+
+        calculateScore(result);
+        return result;
+    }
+
+    private void calculateScore(AssessmentDto assessmentDto) {
+        if (assessmentDto.getFeedbacks() == null || assessmentDto.getFeedbacks().isEmpty()) {
+            return;
+        }
+        BigDecimal sum = assessmentDto.getFeedbacks().stream().map(FeedbackDto::getScore)
+            .map(Objects::requireNonNull)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+        assessmentDto.setScore(sum.divide(new BigDecimal(assessmentDto.getFeedbacks().size()), RoundingMode.FLOOR));
     }
 }

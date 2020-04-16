@@ -32,4 +32,5 @@ public interface FeedbackMapper {
     Feedback toEntity(FeedbackDto dto);
 
     Feedback toEntity(CreateFeedbackDto dto);
+
 }

@@ -34,4 +34,12 @@ public interface AssessmentService {
      * @return
      */
     AssessmentDto createAssessment(CreateAssessmentDto request);
+
+    /**
+     * Get assessment by id
+     *
+     * @param id assessment id
+     * @return assessment if found or throws ResourceNotFoundException
+     */
+    AssessmentDto getById(Integer id);
 }

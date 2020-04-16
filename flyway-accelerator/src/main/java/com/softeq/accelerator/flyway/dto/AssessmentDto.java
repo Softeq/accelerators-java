@@ -7,6 +7,7 @@ package com.softeq.accelerator.flyway.dto;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,4 +30,5 @@ public class AssessmentDto {
 
     private LocalDateTime assessmentDate;
 
+    private BigDecimal score;
 }
