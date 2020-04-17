@@ -5,30 +5,26 @@
 
 package com.softeq.accelerator.flyway.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
- * Assessment representation for API
+ * Feedback creation request representation for API.
  * <p/>
- * Created on 4/8/2020.
+ * Created on 4/14/2020.
  * <p/>
  *
  * @author slapitsky
  */
 @Data
-public class AssessmentDto {
-
-    private Integer id;
-
-    private UserDto targetUser;
-
-    private List<FeedbackDto> feedbacks;
-
-    private LocalDateTime assessmentDate;
-
+@ApiModel
+public class CreateFeedbackDto {
+    private Integer assessmentId;
+    private Integer userId;
+    private LocalDateTime feedbackDate;
     private BigDecimal score;
+    private String comment;
 }

@@ -46,7 +46,7 @@ public class Feedback {
     private Assessment assessment;
 
     @Column(name = "feedback_date")
-    private LocalDateTime assesmentDate;
+    private LocalDateTime feedbackDate;
 
     @Column(name = "score")
     private BigDecimal score;
