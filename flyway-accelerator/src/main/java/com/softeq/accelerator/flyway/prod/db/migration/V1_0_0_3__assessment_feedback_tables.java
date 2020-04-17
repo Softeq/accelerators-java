@@ -35,7 +35,7 @@ public class V1_0_0_3__assessment_feedback_tables extends BaseJavaMigration {
         "    user_id int,\n" +
         "    assessment_id int,\n" +
         "    feedback_date timestamp,\n" +
-        "    score decimal(2,2),\n" +
+        "    score decimal(5,2),\n" +
         "    comment varchar (1024)\n" +
         ");\n" +
         " ALTER SEQUENCE feedback_id_seq OWNED BY feedback.id;\n" +
