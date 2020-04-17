@@ -72,11 +72,13 @@ test {
 }
 
 task readGradleProperties {
-    def appGradle = new File('src/main/resources/application-gradle.properties')
-    if (!appGradle.exists()) {
-        new File('src/main/resources', 'application-gradle.properties').text = ""
-        def newAppGradle = new File('src/main/resources/application-gradle.properties')
-        newAppGradle.append("app.version=")
-        newAppGradle.append(this.version.toString().replace("'", ""))
-    }
+	def appProps = new File('src/main/resources/application.properties')
+	def props = new Properties()
+	appProps.withReader { props.load(it) }
+	if (!props.containsKey("app.version")) {
+		appProps.append("\n")
+		appProps.append("\n")
+		appProps.append("app.version=")
+		appProps.append(this.version.toString().replace("'", ""))
+	}
 }

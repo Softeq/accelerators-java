@@ -3,7 +3,6 @@ package com.softeq.accelerator.flyway.actuator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedHashMap;
@@ -21,7 +20,6 @@ import java.util.Map;
  */
 @Component
 @Endpoint(id = "app-info")
-@PropertySource("classpath:application-gradle.properties")
 public class AppActuatorEndpoint {
 
     public static final String APP_VERSION = "appVersion";

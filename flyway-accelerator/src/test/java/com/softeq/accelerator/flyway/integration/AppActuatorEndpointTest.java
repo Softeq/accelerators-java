@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -33,7 +32,6 @@ import static org.springframework.http.HttpMethod.GET;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {TestWebApplication.class})
 @Profile(TestWebApplication.INTEGRATION_TEST_PROFILE)
-@PropertySource("classpath:application-gradle.properties")
 public class AppActuatorEndpointTest extends AbstractIntegrationTest {
 
     public static final String APP_VERSION = AppActuatorEndpoint.APP_VERSION;
