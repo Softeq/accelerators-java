@@ -75,10 +75,10 @@ task readGradleProperties {
 	def appProps = new File('src/main/resources/application.properties')
 	def props = new Properties()
 	appProps.withReader { props.load(it) }
-	if (!props.containsKey("app.version")) {
+	if (!props.containsKey("info.app.version")) {
 		appProps.append("\n")
 		appProps.append("\n")
-		appProps.append("app.version=")
+		appProps.append("info.app.version=")
 		appProps.append(this.version.toString().replace("'", ""))
 	}
 }

@@ -1,3 +1,8 @@
+/*
+ * Developed by Softeq Development Corporation
+ * http://www.softeq.com
+ */
+
 package com.softeq.accelerator.flyway.actuator;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +29,7 @@ public class AppActuatorEndpoint {
 
     public static final String APP_VERSION = "appVersion";
 
-    @Value("${app.version}")
+    @Value("${info.app.version}")
     private String appVersion;
 
     @ReadOperation

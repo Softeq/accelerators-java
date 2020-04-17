@@ -36,11 +36,11 @@ public class AppActuatorEndpointTest extends AbstractIntegrationTest {
 
     public static final String APP_VERSION = AppActuatorEndpoint.APP_VERSION;
 
-    @Value("${app.version}")
+    @Value("${info.app.version}")
     private String appVersion;
 
     @Test
-    public void testGetAllUsersOk() {
+    public void testEndpointAppInfoOk() {
         HttpHeaders headers = new HttpHeaders();
         ResponseEntity<Map<String, Object>> response = template
                 .exchange(base + contextPath + "/api/v1/actuator/app-info",
