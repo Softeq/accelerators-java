@@ -30,6 +30,7 @@ ext {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	implementation 'org.flywaydb:flyway-core'
 	implementation "org.mapstruct:mapstruct-processor:$mapStructVersion"
@@ -55,6 +56,8 @@ dependencies {
 	}
 }
 
+build.dependsOn 'readGradleProperties'
+
 checkstyle {
 	configFile file('gradle/checkstyle/oracle_checks.xml')
 }
@@ -66,4 +69,16 @@ tasks.withType(Checkstyle) {
 
 test {
 	useJUnitPlatform()
+}
+
+task readGradleProperties {
+	def appProps = new File('src/main/resources/application.properties')
+	def props = new Properties()
+	appProps.withReader { props.load(it) }
+	if (!props.containsKey("info.app.version")) {
+		appProps.append("\n")
+		appProps.append("\n")
+		appProps.append("info.app.version=")
+		appProps.append(this.version.toString().replace("'", ""))
+	}
 }
