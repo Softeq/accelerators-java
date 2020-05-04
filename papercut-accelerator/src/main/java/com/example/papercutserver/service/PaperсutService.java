@@ -39,11 +39,10 @@ public class PaperсutService {
         File newPdf = new File(resource + fileName);
         newPdf.createNewFile();
 
-        pdfMergerUtility.setDocumentMergeMode(PDFMergerUtility.DocumentMergeMode.OPTIMIZE_RESOURCES_MODE);
+        pdfMergerUtility.setDocumentMergeMode(PDFMergerUtility.DocumentMergeMode.PDFBOX_LEGACY_MODE);
         pdfMergerUtility.setDestinationFileName(newPdf.getPath());
 
         pdfMergerUtility.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
-//            pdfMergerUtility.mergeDocuments(MemoryUsageSetting.setupTempFileOnly());
         return newPdf;
     }
 
@@ -61,6 +60,7 @@ public class PaperсutService {
             try {
                 PdfReader reader = new PdfReader(path);
                 for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+                    // Works with multipage files
                     document.newPage();
                     //import the page from source pdf
                     PdfImportedPage page = writer.getImportedPage(reader, i);
