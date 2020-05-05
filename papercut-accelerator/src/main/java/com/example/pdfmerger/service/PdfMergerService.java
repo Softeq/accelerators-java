@@ -1,4 +1,4 @@
-package com.example.papercutserver.service;
+package com.example.pdfmerger.service;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -24,7 +24,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class PaperсutService {
+public class PdfMergerService {
+
+    private static final Long MAX_MEMORY_USAGE = 2684354560L;
 
     public static File mergePdfIntoNewFileApache(String resource, List<String> paths, String fileName) throws IOException {
         PDFMergerUtility pdfMergerUtility = new PDFMergerUtility();
@@ -42,7 +44,7 @@ public class PaperсutService {
         pdfMergerUtility.setDocumentMergeMode(PDFMergerUtility.DocumentMergeMode.PDFBOX_LEGACY_MODE);
         pdfMergerUtility.setDestinationFileName(newPdf.getPath());
 
-        pdfMergerUtility.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
+        pdfMergerUtility.mergeDocuments(MemoryUsageSetting.setupMixed(MAX_MEMORY_USAGE));
         return newPdf;
     }
 
@@ -82,11 +84,11 @@ public class PaperсutService {
         String resource = getResourcePath(uploadPath);
         List<String> paths = getPaths(resource);
 
-        mergePdfIntoNewFileIText(resource, paths, "/concatenated.pdf");
+        mergePdfIntoNewFileApache(resource, paths, "/concatenated.pdf");
     }
 
     public static String getResourcePath(String uploadPath) {
-        return Objects.requireNonNull(PaperсutService.class.getClassLoader().getResource(uploadPath)).getPath();
+        return Objects.requireNonNull(PdfMergerService.class.getClassLoader().getResource(uploadPath)).getPath();
     }
 
     public static List<String> getPaths(String resource) {

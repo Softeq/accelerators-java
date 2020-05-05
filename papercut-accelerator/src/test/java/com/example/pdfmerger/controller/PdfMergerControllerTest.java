@@ -1,4 +1,4 @@
-package com.example.papercutserver.controller;
+package com.example.pdfmerger.controller;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PaperсutControllerTest {
+class PdfMergerControllerTest {
 
     public static final String LOCALHOST = "http://localhost:";
     public static final String PATH = "pdf/";

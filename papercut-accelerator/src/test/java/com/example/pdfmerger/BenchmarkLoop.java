@@ -1,7 +1,7 @@
-package com.example.papercutserver;
+package com.example.pdfmerger;
 
-import com.example.papercutserver.service.PaperсutService;
-import com.example.papercutserver.utils.TriFunction;
+import com.example.pdfmerger.service.PdfMergerService;
+import com.example.pdfmerger.utils.TriFunction;
 import com.itextpdf.text.DocumentException;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -15,6 +15,7 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
+import org.openjdk.jmh.annotations.Timeout;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.Runner;
@@ -35,16 +36,17 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
-@Warmup(iterations = 3)
+@Warmup(iterations = 3, time = 15, timeUnit = TimeUnit.MINUTES)
 @Measurement(iterations = 5)
+@Timeout(time = 15, timeUnit = TimeUnit.MINUTES)
 public class BenchmarkLoop {
 
     public static final Map<Lib, TriFunction<String, List<String>, String, File>> commands = new EnumMap<>(Lib.class);
-    private static final String TEMP_DIR = "temp/";
+    private static final String TEMP_DIR = "tmp/";
 
     static {
-        commands.put(Lib.APACHE, PaperсutService::mergePdfIntoNewFileApache);
-        commands.put(Lib.ITEXT, PaperсutService::mergePdfIntoNewFileIText);
+        commands.put(Lib.APACHE, PdfMergerService::mergePdfIntoNewFileApache);
+        commands.put(Lib.ITEXT, PdfMergerService::mergePdfIntoNewFileIText);
     }
 
     @Param({"100"})
@@ -55,7 +57,7 @@ public class BenchmarkLoop {
 
     @Setup (Level.Trial)
     public synchronized void  initialize() {
-        resource = PaperсutService.getResourcePath("pdf/");
+        resource = PdfMergerService.getResourcePath("pdf/");
         DATA_FOR_TESTING = createData(resource);
 
         java.util.logging.Logger
@@ -95,14 +97,14 @@ public class BenchmarkLoop {
         String pathToTempDir = resource + TEMP_DIR;
         Path tempDir = Files.createDirectory(Paths.get(pathToTempDir));
         for (int i = 0; i < N; i++) {
-            File newFile = commands.get(lib).apply(pathToTempDir, DATA_FOR_TESTING, (i + 100) + ".pdf");
+            File newFile = commands.get(lib).apply(pathToTempDir, DATA_FOR_TESTING, i + ".pdf");
             bh.consume(newFile);
         }
         FileUtils.deleteDirectory(tempDir.toFile());
     }
 
     private List<String> createData(String resource) {
-        return PaperсutService.getPaths(resource);
+        return PdfMergerService.getPaths(resource);
     }
 
     private enum Lib {

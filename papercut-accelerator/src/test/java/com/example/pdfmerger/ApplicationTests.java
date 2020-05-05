@@ -1,10 +1,10 @@
-package com.example.papercutserver;
+package com.example.pdfmerger;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PapercutServerApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {

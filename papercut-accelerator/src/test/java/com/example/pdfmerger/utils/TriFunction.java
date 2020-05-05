@@ -1,4 +1,4 @@
-package com.example.papercutserver.utils;
+package com.example.pdfmerger.utils;
 
 import com.itextpdf.text.DocumentException;
 

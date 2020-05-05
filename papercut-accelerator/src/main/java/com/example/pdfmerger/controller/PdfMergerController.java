@@ -1,6 +1,6 @@
-package com.example.papercutserver.controller;
+package com.example.pdfmerger.controller;
 
-import com.example.papercutserver.service.PaperсutService;
+import com.example.pdfmerger.service.PdfMergerService;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,17 +13,17 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/papercut")
-public class PaperсutController {
+public class PdfMergerController {
 
     @Value("${upload.path}")
     private String uploadPath;
 
     @Autowired
-    private PaperсutService paperсutService;
+    private PdfMergerService pdfMergerService;
 
     @GetMapping
     public ResponseEntity constructSinglePdf() throws IOException, DocumentException {
-        paperсutService.createSinglePdf(uploadPath);
+        pdfMergerService.createSinglePdf(uploadPath);
         return ResponseEntity.ok().build();
     }
 }

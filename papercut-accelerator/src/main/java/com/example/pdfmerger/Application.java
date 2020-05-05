@@ -1,13 +1,13 @@
-package com.example.papercutserver;
+package com.example.pdfmerger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PapercutServerApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(PapercutServerApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }
