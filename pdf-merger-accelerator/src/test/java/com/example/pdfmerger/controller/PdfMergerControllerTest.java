@@ -49,7 +49,7 @@ class PdfMergerControllerTest {
     @Test
     void constructSinglePdf() {
 
-        ResponseEntity response = this.restTemplate.getForEntity(LOCALHOST + port + "/papercut", ResponseEntity.class);
+        ResponseEntity response = this.restTemplate.getForEntity(LOCALHOST + port + "/merge-pdf", ResponseEntity.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
         File file = getConcatenatedPdf();

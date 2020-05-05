@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/papercut")
+@RequestMapping("/merge-pdf")
 public class PdfMergerController {
 
     @Value("${upload.path}")

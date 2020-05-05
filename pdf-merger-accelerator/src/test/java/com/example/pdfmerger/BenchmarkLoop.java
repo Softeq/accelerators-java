@@ -1,7 +1,8 @@
 package com.example.pdfmerger;
 
 import com.example.pdfmerger.service.PdfMergerService;
-import com.example.pdfmerger.utils.TriFunction;
+import com.example.pdfmerger.service.impl.ITextMerger;
+import com.example.pdfmerger.service.impl.PdfBoxMerger;
 import com.itextpdf.text.DocumentException;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -18,6 +19,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Timeout;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
+import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -28,35 +30,27 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
-@Warmup(iterations = 3, time = 15, timeUnit = TimeUnit.MINUTES)
-@Measurement(iterations = 5)
+@Warmup(iterations = 1, time = 15, timeUnit = TimeUnit.MINUTES)
+@Measurement(iterations = 2)
 @Timeout(time = 15, timeUnit = TimeUnit.MINUTES)
 public class BenchmarkLoop {
 
-    public static final Map<Lib, TriFunction<String, List<String>, String, File>> commands = new EnumMap<>(Lib.class);
-    private static final String TEMP_DIR = "tmp/";
+    private static final String TEMP_DIR = System.getProperty("java.io.tmpdir") + "/tmp/";
 
-    static {
-        commands.put(Lib.APACHE, PdfMergerService::mergePdfIntoNewFileApache);
-        commands.put(Lib.ITEXT, PdfMergerService::mergePdfIntoNewFileIText);
-    }
-
-    @Param({"100"})
+    @Param({"10"})
     private int N;
 
     private List<String> DATA_FOR_TESTING;
     private String resource;
 
-    @Setup (Level.Trial)
-    public synchronized void  initialize() {
+    @Setup(Level.Trial)
+    public synchronized void initialize() {
         resource = PdfMergerService.getResourcePath("pdf/");
         DATA_FOR_TESTING = createData(resource);
 
@@ -73,11 +67,12 @@ public class BenchmarkLoop {
     }
 
     public static void main(String[] args) throws RunnerException {
-
         Options opt = new OptionsBuilder()
-                .include(BenchmarkLoop.class.getSimpleName())
-                .forks(1)
-                .build();
+            .include(BenchmarkLoop.class.getSimpleName())
+            .forks(1)
+            .resultFormat(ResultFormatType.JSON)
+            .result(System.getProperty("java.io.tmpdir") + "/test-result.jmh.json")
+            .build();
 
         new Runner(opt).run();
     }
@@ -94,10 +89,22 @@ public class BenchmarkLoop {
 
     private void startBenchmarkForLib(Lib lib, Blackhole bh) throws IOException, DocumentException {
 
-        String pathToTempDir = resource + TEMP_DIR;
-        Path tempDir = Files.createDirectory(Paths.get(pathToTempDir));
+        PdfMergerService pdfMergerService;
+        switch (lib) {
+            case ITEXT:
+                pdfMergerService = new ITextMerger();
+                break;
+            case APACHE:
+                pdfMergerService = new PdfBoxMerger();
+                break;
+            default:
+                throw new RuntimeException();
+
+        }
+
+        Path tempDir = Files.createDirectory(Paths.get(TEMP_DIR));
         for (int i = 0; i < N; i++) {
-            File newFile = commands.get(lib).apply(pathToTempDir, DATA_FOR_TESTING, i + ".pdf");
+            File newFile = pdfMergerService.mergePdfIntoNewFile(TEMP_DIR, DATA_FOR_TESTING, i + ".pdf");
             bh.consume(newFile);
         }
         FileUtils.deleteDirectory(tempDir.toFile());
