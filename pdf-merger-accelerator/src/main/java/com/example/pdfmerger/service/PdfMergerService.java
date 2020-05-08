@@ -4,6 +4,7 @@ import com.itextpdf.text.DocumentException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,7 +29,11 @@ public abstract class PdfMergerService {
     }
 
     public static String getResourcePath(String uploadPath) {
-        return Objects.requireNonNull(PdfMergerService.class.getClassLoader().getResource(uploadPath)).getPath();
+        try {
+            return Objects.requireNonNull(Paths.get(PdfMergerService.class.getClassLoader().getResource(uploadPath).toURI())).toString();
+        } catch (URISyntaxException e) {
+            return "";
+        }
     }
 
     public static List<String> getPaths(String resource) {
