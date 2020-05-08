@@ -11,12 +11,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 public class ITextMerger extends PdfMergerService {
 
     @Override
-    public File mergePdfIntoNewFile(String resource, List<String> paths, String fileName) throws IOException,
+    public File mergePdfIntoNewFile(String resource, List<Path> paths, String fileName) throws IOException,
         DocumentException {
 
         File newPdf = new File(resource + fileName);
@@ -29,7 +30,7 @@ public class ITextMerger extends PdfMergerService {
 
         paths.forEach(path -> {
             try {
-                PdfReader reader = new PdfReader(path);
+                PdfReader reader = new PdfReader(path.toString());
                 for (int i = 1; i <= reader.getNumberOfPages(); i++) {
                     // Works with multipage files
                     document.newPage();

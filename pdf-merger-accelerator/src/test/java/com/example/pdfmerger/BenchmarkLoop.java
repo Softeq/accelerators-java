@@ -46,11 +46,12 @@ public class BenchmarkLoop {
     @Param({"10"})
     private int N;
 
-    private List<String> DATA_FOR_TESTING;
+    private List<Path> DATA_FOR_TESTING;
     private String resource;
 
     @Setup(Level.Trial)
-    public synchronized void initialize() {
+    public synchronized void initialize() throws IOException {
+        removeTempDirectory();
         resource = PdfMergerService.getResourcePath("pdf/");
         DATA_FOR_TESTING = createData(resource);
 
@@ -60,10 +61,7 @@ public class BenchmarkLoop {
 
     @TearDown
     public synchronized void tearDown() throws IOException {
-        File tempDir = new File(resource + TEMP_DIR);
-        if (tempDir.isDirectory()) {
-            FileUtils.deleteDirectory(tempDir);
-        }
+        removeTempDirectory();
     }
 
     public static void main(String[] args) throws RunnerException {
@@ -110,11 +108,18 @@ public class BenchmarkLoop {
         FileUtils.deleteDirectory(tempDir.toFile());
     }
 
-    private List<String> createData(String resource) {
+    private List<Path> createData(String resource) {
         return PdfMergerService.getPaths(resource);
     }
 
     private enum Lib {
         APACHE, ITEXT;
+    }
+
+    private void removeTempDirectory() throws IOException {
+        File tempDir = new File(TEMP_DIR);
+        if (tempDir.isDirectory()) {
+            FileUtils.deleteDirectory(tempDir);
+        }
     }
 }

@@ -18,12 +18,12 @@ public abstract class PdfMergerService {
 
     public static final Long MAX_MEMORY_USAGE = 2684354560L;
 
-    public abstract File mergePdfIntoNewFile(String resource, List<String> paths, String s) throws IOException, DocumentException;
+    public abstract File mergePdfIntoNewFile(String resource, List<Path> paths, String s) throws IOException, DocumentException;
 
     public void createSinglePdf(String uploadPath) throws IOException, DocumentException {
 
         String resource = getResourcePath(uploadPath);
-        List<String> paths = getPaths(resource);
+        List<Path> paths = getPaths(resource);
 
         mergePdfIntoNewFile(resource, paths, "/concatenated.pdf");
     }
@@ -36,13 +36,12 @@ public abstract class PdfMergerService {
         }
     }
 
-    public static List<String> getPaths(String resource) {
+    public static List<Path> getPaths(String resource) {
         try (Stream<Path> walk = Files.walk(Paths.get(resource))) {
 
             return walk
                 .filter(Files::isRegularFile)
                 .sorted(Comparator.comparing(Path::getFileName))
-                .map(Path::toString)
                 .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException();

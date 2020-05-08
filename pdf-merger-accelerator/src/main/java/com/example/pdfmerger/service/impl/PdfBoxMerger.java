@@ -8,18 +8,19 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 @Service
 public class PdfBoxMerger extends PdfMergerService {
 
     @Override
-    public File mergePdfIntoNewFile(String resource, List<String> paths, String fileName) throws IOException {
+    public File mergePdfIntoNewFile(String resource, List<Path> paths, String fileName) throws IOException {
 
         PDFMergerUtility pdfMergerUtility = new PDFMergerUtility();
         paths.forEach(path -> {
             try {
-                pdfMergerUtility.addSource(path);
+                pdfMergerUtility.addSource(path.toString());
             } catch (FileNotFoundException e) {
                 throw new RuntimeException();
             }
