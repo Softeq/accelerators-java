@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+}
+
+group 'com.softeq'
+version '0.0.0'
+sourceCompatibility = '14'
+
+repositories {
+    mavenCentral()
+}
