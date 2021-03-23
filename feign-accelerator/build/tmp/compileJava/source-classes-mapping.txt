@@ -1,0 +1,22 @@
+com/softeq/feign/configuration/ApplicationConfig.java
+ com.softeq.feign.configuration.ApplicationConfig
+com/softeq/feign/client/WeatherClient.java
+ com.softeq.feign.client.WeatherClient
+com/softeq/feign/FeignApplication.java
+ com.softeq.feign.FeignApplication
+com/softeq/feign/model/WeatherResponse.java
+ com.softeq.feign.model.WeatherResponse
+com/softeq/feign/model/JiraResponse.java
+ com.softeq.feign.model.JiraResponse
+com/softeq/feign/client/JiraClient.java
+ com.softeq.feign.client.JiraClient
+com/softeq/feign/configuration/JiraClientConfig.java
+ com.softeq.feign.configuration.JiraClientConfig
+com/softeq/feign/configuration/WeatherClientConfig.java
+ com.softeq.feign.configuration.WeatherClientConfig
+com/softeq/feign/controller/AppController.java
+ com.softeq.feign.controller.AppController
+com/softeq/feign/service/FullService.java
+ com.softeq.feign.service.FullService
+com/softeq/feign/exception/CustomErrorDecoder.java
+ com.softeq.feign.exception.CustomErrorDecoder

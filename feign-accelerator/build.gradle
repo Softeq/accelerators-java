@@ -1,0 +1,76 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'io.freefair.lombok' version '5.3.0'
+}
+
+group 'com.softeq.feign'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '14'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://packages.atlassian.com/maven/repository/public"
+    }
+}
+
+ext {
+    swaggerVersion = '3.0.0'
+    mapStructVersion = '1.4.2.Final'
+    feignVersion = '11.1'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.7.RELEASE'
+
+    implementation group: 'com.atlassian.jira', name: 'jira-rest-java-client-app', version: '5.2.0'
+    implementation group: 'com.atlassian.connect', name: 'atlassian-connect-spring-boot-starter', version: '2.1.2'
+    implementation group: 'com.atlassian.fugue', name: 'fugue', version: '2.6.1'
+    implementation group: 'com.atlassian.util.concurrent', name: 'atlassian-util-concurrent', version: '3.0.0'
+
+    implementation "io.github.openfeign:feign-okhttp:$feignVersion"
+    implementation "io.github.openfeign:feign-gson:$feignVersion"
+    implementation "io.github.openfeign:feign-slf4j:$feignVersion"
+    implementation group: 'io.github.openfeign', name: 'feign-jackson', version: '11.1'
+
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+
+    implementation group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
+
+    implementation "org.mapstruct:mapstruct-processor:$mapStructVersion"
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+
+    implementation("io.springfox:springfox-swagger2:$swaggerVersion") {
+        exclude group: 'org.mapstruct', module: 'mapstruct-processor'
+    }
+    implementation "io.springfox:springfox-swagger-ui:$swaggerVersion"
+
+    configurations.all {
+        exclude module: 'slf4j-log4j12'
+    }
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    testImplementation "com.github.tomakehurst:wiremock-jre8:2.27.2"
+}
+
+build.dependsOn 'readGradleProperties'
+
+test {
+    useJUnitPlatform()
+}
+
+task readGradleProperties {
+    def appProps = new File('src/main/resources/application.properties')
+    def props = new Properties()
+    appProps.withReader { props.load(it) }
+}
