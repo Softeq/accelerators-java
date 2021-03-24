@@ -7,6 +7,7 @@ package com.softeq.amilosh.edu.service.impl;
 
 import com.softeq.amilosh.edu.dto.EmployeeCreateDto;
 import com.softeq.amilosh.edu.entity.Employee;
+import com.softeq.amilosh.edu.mapper.EmployeeMapper;
 import com.softeq.amilosh.edu.repository.EmployeeRepo;
 import com.softeq.amilosh.edu.service.EmployeeService;
 import org.springframework.stereotype.Service;
@@ -14,16 +15,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeRepo employeeRepo;
+    private final EmployeeRepo employeeRepo;
+    private final EmployeeMapper employeeMapper;
 
-    public EmployeeServiceImpl(EmployeeRepo employeeRepo) {
+    public EmployeeServiceImpl(EmployeeRepo employeeRepo, EmployeeMapper employeeMapper) {
         this.employeeRepo = employeeRepo;
+        this.employeeMapper = employeeMapper;
     }
 
     @Override
     public Employee create(EmployeeCreateDto dto) {
-        Employee employee = new Employee();
-        employee.setName(dto.getName());
+        Employee employee = employeeMapper.toEntity(dto);
         return employeeRepo.save(employee);
     }
 }

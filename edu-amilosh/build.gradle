@@ -15,12 +15,16 @@ repositories {
 
 ext {
     checkstyleToolVersion = '8.41'
+    mapStructVersion = '1.4.2.Final'
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'org.postgresql:postgresql'
+    implementation "org.mapstruct:mapstruct-processor:$mapStructVersion"
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
 }
 
 checkstyle {
