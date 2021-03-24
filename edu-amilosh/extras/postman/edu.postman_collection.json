@@ -9,7 +9,7 @@
 			"name": "Employee",
 			"item": [
 				{
-					"name": "Create Employee",
+					"name": "Create employee",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"john\"\n}"
+							"raw": "{\n\t\"name\": \"john\",\n\t\"placeNumber\": 11\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/employee",
@@ -33,6 +33,37 @@
 							"port": "8080",
 							"path": [
 								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replace employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"employeeId\": 1,\n\t\"workPlaceNumber\": 22\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee/replace",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"replace"
 							]
 						}
 					},

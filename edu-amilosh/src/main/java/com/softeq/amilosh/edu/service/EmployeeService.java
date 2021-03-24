@@ -6,6 +6,7 @@
 package com.softeq.amilosh.edu.service;
 
 import com.softeq.amilosh.edu.dto.EmployeeCreateDto;
+import com.softeq.amilosh.edu.dto.ReplaceEmployeeDto;
 import com.softeq.amilosh.edu.entity.Employee;
 
 /**
@@ -19,4 +20,6 @@ import com.softeq.amilosh.edu.entity.Employee;
 public interface EmployeeService {
 
     Employee create(EmployeeCreateDto dto);
+
+    Employee replace(ReplaceEmployeeDto dto);
 }

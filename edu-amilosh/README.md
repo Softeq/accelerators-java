@@ -23,3 +23,22 @@ employee.setWorkPlace(workplace);
 employeeRepo.save(employee);
 ```
 Employee is saved. WorkPlace is saved with employee_id.
+
+3)
+```
+employee.setWorkPlace(null);
+newWorkPlace.setEmployee(employee);
+employee.setWorkPlace(newWorkPlace);
+employeeRepo.save(employee);
+```
+Old workPlace remained without changes.
+
+4)
+```
+oldWorkSpace.setEmployee(null);
+employee.setWorkPlace(null);
+newWorkPlace.setEmployee(employee);
+employee.setWorkPlace(newWorkPlace);
+employeeRepo.save(employee);
+```
+Old workPlace remained with employee_id = null.

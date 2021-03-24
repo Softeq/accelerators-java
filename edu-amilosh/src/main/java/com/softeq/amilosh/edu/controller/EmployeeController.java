@@ -7,6 +7,7 @@ package com.softeq.amilosh.edu.controller;
 
 import com.softeq.amilosh.edu.dto.EmployeeCreateDto;
 import com.softeq.amilosh.edu.dto.EmployeeDto;
+import com.softeq.amilosh.edu.dto.ReplaceEmployeeDto;
 import com.softeq.amilosh.edu.entity.Employee;
 import com.softeq.amilosh.edu.mapper.EmployeeMapper;
 import com.softeq.amilosh.edu.service.EmployeeService;
@@ -41,6 +42,12 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeDto createEmployee(@RequestBody EmployeeCreateDto dto) {
         Employee employee = employeeService.create(dto);
+        return employeeMapper.toDto(employee);
+    }
+
+    @PostMapping(value = "/replace", consumes = "application/json", produces = "application/json")
+    public EmployeeDto replaceEmployee(@RequestBody ReplaceEmployeeDto dto) {
+        Employee employee = employeeService.replace(dto);
         return employeeMapper.toDto(employee);
     }
 }
