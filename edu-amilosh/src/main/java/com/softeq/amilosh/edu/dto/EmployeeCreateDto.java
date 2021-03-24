@@ -16,6 +16,7 @@ package com.softeq.amilosh.edu.dto;
 public class EmployeeCreateDto {
 
     private String name;
+    private Integer placeNumber;
 
     public String getName() {
         return name;
@@ -23,5 +24,13 @@ public class EmployeeCreateDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getPlaceNumber() {
+        return placeNumber;
+    }
+
+    public void setPlaceNumber(Integer placeNumber) {
+        this.placeNumber = placeNumber;
     }
 }

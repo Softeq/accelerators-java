@@ -17,6 +17,7 @@ public class EmployeeDto {
 
     private Integer id;
     private String name;
+    private WorkPlaceDto workPlace;
 
     public Integer getId() {
         return id;
@@ -32,5 +33,13 @@ public class EmployeeDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public WorkPlaceDto getWorkPlace() {
+        return workPlace;
+    }
+
+    public void setWorkPlace(WorkPlaceDto workPlace) {
+        this.workPlace = workPlace;
     }
 }

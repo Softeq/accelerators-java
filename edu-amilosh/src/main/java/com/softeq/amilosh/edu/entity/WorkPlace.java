@@ -13,11 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * Represents Employee from DB.
+ * Represents WorkPlace from DB.
  * <p/>
  * Created on 2021-03-24
  * <p/>
@@ -25,19 +26,20 @@ import javax.persistence.Table;
  * @author Alexander Milosh
  */
 @Entity
-@Table(name = "employee")
-public class Employee implements Serializable {
+@Table(name = "workplace")
+public class WorkPlace implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "number")
+    private Integer number;
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private WorkPlace workPlace;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     public Integer getId() {
         return id;
@@ -47,19 +49,19 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
-    public WorkPlace getWorkPlace() {
-        return workPlace;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setWorkPlace(WorkPlace workPlace) {
-        this.workPlace = workPlace;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
