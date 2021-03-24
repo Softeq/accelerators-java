@@ -42,3 +42,13 @@ employee.setWorkPlace(newWorkPlace);
 employeeRepo.save(employee);
 ```
 Old workPlace remained with employee_id = null.
+
+5) 
+```
+oldWorkSpace.setEmployee(null);
+employee.setWorkPlace(null);
+newWorkPlace.setEmployee(employee);
+employee.setWorkPlace(newWorkPlace);
+employeeRepo.save(employee);
+```
+With Cascade All nad orphanRemoval. WorkPlace is deleted. Computer is deleted.

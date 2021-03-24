@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (isNull(oldWorkPlace)) {
             return null;
         }
-        oldWorkPlace.setEmployee(null);
+        //oldWorkPlace.setEmployee(null);
         employee.setWorkPlace(null);
         WorkPlace newWorkPlace = new WorkPlace();
         newWorkPlace.setNumber(dto.getWorkPlaceNumber());

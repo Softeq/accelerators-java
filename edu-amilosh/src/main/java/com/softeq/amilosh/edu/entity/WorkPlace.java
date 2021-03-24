@@ -41,6 +41,10 @@ public class WorkPlace implements Serializable {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "computer_id")
+    private Computer computer;
+
     public Integer getId() {
         return id;
     }
@@ -63,5 +67,13 @@ public class WorkPlace implements Serializable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 }

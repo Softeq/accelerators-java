@@ -68,6 +68,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Set computer to work place",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/workplace/computer/1/12345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"workplace",
+								"computer",
+								"1",
+								"12345"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
