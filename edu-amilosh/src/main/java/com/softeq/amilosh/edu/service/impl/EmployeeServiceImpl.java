@@ -14,21 +14,27 @@ import com.softeq.amilosh.edu.repository.EmployeeRepo;
 import com.softeq.amilosh.edu.repository.WorkPlaceRepo;
 import com.softeq.amilosh.edu.service.EmployeeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 
 import static java.util.Objects.isNull;
 
 @Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepo employeeRepo;
     private final EmployeeMapper employeeMapper;
     private final WorkPlaceRepo workPlaceRepo;
+    private EntityManager entityManager;
 
     public EmployeeServiceImpl(EmployeeRepo employeeRepo, EmployeeMapper employeeMapper,
-                               WorkPlaceRepo workPlaceRepo) {
+                               WorkPlaceRepo workPlaceRepo, EntityManager entityManager) {
         this.employeeRepo = employeeRepo;
         this.employeeMapper = employeeMapper;
         this.workPlaceRepo = workPlaceRepo;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -47,16 +53,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (isNull(employee)) {
             return null;
         }
-        WorkPlace oldWorkPlace = workPlaceRepo.findById(employee.getWorkPlace().getId()).orElse(null);
-        if (isNull(oldWorkPlace)) {
+        removeWorkPlace(employee.getWorkPlace().getId());
+        entityManager.detach(employee);
+        //entityManager.clear();
+        Employee employeeToReplace = employeeRepo.findById(dto.getEmployeeId()).orElse(null);
+        if (isNull(employeeToReplace)) {
             return null;
         }
-        //oldWorkPlace.setEmployee(null);
-        employee.setWorkPlace(null);
         WorkPlace newWorkPlace = new WorkPlace();
         newWorkPlace.setNumber(dto.getWorkPlaceNumber());
         newWorkPlace.setEmployee(employee);
-        employee.setWorkPlace(newWorkPlace);
+        employeeToReplace.setWorkPlace(newWorkPlace);
         return employeeRepo.save(employee);
+    }
+
+    private void removeWorkPlace(Integer id) {
+        var query = entityManager
+                .createNativeQuery("delete from workplace w where w.id = :id", WorkPlace.class);
+        query.setParameter("id", id);
+        query.executeUpdate();
+        entityManager.flush();
     }
 }
