@@ -1,0 +1,371 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "urlPath": "/weather",
+        "method": "POST",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "${json-unit.any-string}",
+              "currencyAbbreviation": "${json-unit.any-string}"
+            }
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "cityName": "",
+          "countryCode": "",
+          "temperature": 0.0,
+          "weatherDescription": ""
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPath": "/rates",
+        "method": "POST",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "${json-unit.any-string}",
+              "currencyAbbreviation": "${json-unit.any-string}"
+            }
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "City_Name": "",
+          "Cur_ID": 0,
+          "Date": "2021-08-05T00:00:00",
+          "Cur_Abbreviation": "",
+          "Cur_Scale": 0,
+          "Cur_Name": "",
+          "Cur_OfficialRate": 0.0
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/rates",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Vilnius",
+              "currencyAbbreviation": "EUR"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "City_Name": "Vilnius",
+          "Cur_ID": 451,
+          "Date": "2021-08-05T00:00:00",
+          "Cur_Abbreviation": "EUR",
+          "Cur_Scale": 1,
+          "Cur_Name": "Euro",
+          "Cur_OfficialRate": 2.9835
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/rates",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Minsk",
+              "currencyAbbreviation": "BYN"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "City_Name": "Minsk",
+          "Cur_ID": 1,
+          "Date": "2021-08-05T00:00:00",
+          "Cur_Abbreviation": "BYN",
+          "Cur_Scale": 1,
+          "Cur_Name": "Belarusian rubles",
+          "Cur_OfficialRate": 1.0
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/rates",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Munich",
+              "currencyAbbreviation": "EUR"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "City_Name": "Munich",
+          "Cur_ID": 451,
+          "Date": "2021-08-05T00:00:00",
+          "Cur_Abbreviation": "EUR",
+          "Cur_Scale": 1,
+          "Cur_Name": "Euro",
+          "Cur_OfficialRate": 2.9835
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/rates",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Kiev",
+              "currencyAbbreviation": "UAH"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "City_Name": "Kiev",
+          "Cur_ID": 449,
+          "Date": "2021-08-05T00:00:00",
+          "Cur_Abbreviation": "UAH",
+          "Cur_Scale": 100,
+          "Cur_Name": "Hryvnia",
+          "Cur_OfficialRate": 9.3471
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/rates",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Moscow",
+              "currencyAbbreviation": "RUB"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "City_Name": "Moscow",
+          "Cur_ID": 456,
+          "Date": "2021-08-05T00:00:00",
+          "Cur_Abbreviation": "RUB",
+          "Cur_Scale": 100,
+          "Cur_Name": "Russian rubles",
+          "Cur_OfficialRate": 3.4541
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/rates",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Houston",
+              "currencyAbbreviation": "USD"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "City_Name": "Houston",
+          "Cur_ID": 431,
+          "Date": "2021-08-05T00:00:00",
+          "Cur_Abbreviation": "USD",
+          "Cur_Scale": 1,
+          "Cur_Name": "U.S. dollar",
+          "Cur_OfficialRate": 2.5158
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/weather",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Vilnius",
+              "currencyAbbreviation": "EUR"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "cityName": "Vilnius",
+          "countryCode": "LT",
+          "temperature": 291.64,
+          "weatherDescription": "light intensity shower rain"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/weather",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Minsk",
+              "currencyAbbreviation": "BYN"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "cityName": "Minsk",
+          "countryCode": "BY",
+          "temperature": 294.01,
+          "weatherDescription": "overcast clouds"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/weather",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Munich",
+              "currencyAbbreviation": "EUR"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "cityName": "Munich",
+          "countryCode": "DE",
+          "temperature": 288.85,
+          "weatherDescription": "light rain"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/weather",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Kiev",
+              "currencyAbbreviation": "UAH"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "cityName": "Kiev",
+          "countryCode": "UA",
+          "temperature": 301.02,
+          "weatherDescription": "clear sky"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/weather",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Moscow",
+              "currencyAbbreviation": "RUB"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "cityName": "Moscow",
+          "countryCode": "RU",
+          "temperature": 296.04,
+          "weatherDescription": "light rain"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/weather",
+        "bodyPatterns": [
+          {
+            "equalToJson": {
+              "cityName": "Houston",
+              "currencyAbbreviation": "USD"
+            },
+            "ignoreArrayOrder": true,
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "cityName": "Houston",
+          "countryCode": "US",
+          "temperature": 301.86,
+          "weatherDescription": "broken clouds"
+        }
+      }
+    }
+  ]
+}

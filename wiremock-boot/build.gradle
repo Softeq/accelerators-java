@@ -1,0 +1,56 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
+}
+
+group = 'com.softeq'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Mapstruct
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    // H2
+    runtimeOnly 'com.h2database:h2'
+
+    // JSP, Servlet, HTTP
+    implementation group: 'org.apache.tomcat', name: 'tomcat-jasper', version: '9.0.50'
+    implementation 'javax.servlet:jstl:1.2'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
+    // Wiremock
+    testImplementation "com.github.tomakehurst:wiremock-jre8:2.27.0"
+    testImplementation group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.27.0'
+
+    // Apache POI (Excel)
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
+}
+
+test {
+    useJUnitPlatform()
+}

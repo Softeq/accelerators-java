@@ -1,0 +1,5 @@
+server:
+  port: 8081
+gateway:
+    host: localhost
+    port: 8080
