@@ -4,3 +4,12 @@ spring:
     username: postgres
     password: postgres
 
+  flyway:
+    user: postgres
+    password: postgres
+    schemas: flyway_accelerator
+    url: jdbc:postgresql://localhost:5432/postgres
+    locations: classpath:db/migration
+    placeholders:
+      defaultUser: Admin
+    repeatable-sql-migration-prefix: Repeatable
