@@ -5,7 +5,7 @@
 
 CREATE TABLE assessment
 (
-    id              uuid NOT NULL DEFAULT gen_random_uuid(),
+    id              uuid NOT NULL DEFAULT random_uuid(),
     user_id         uuid,
     average         decimal(5, 2),
     feedbacks_count int,
@@ -18,7 +18,7 @@ ALTER TABLE assessment
 
 CREATE TABLE feedback
 (
-    id             uuid NOT NULL DEFAULT gen_random_uuid(),
+    id             uuid NOT NULL DEFAULT random_uuid(),
     user_id        uuid,
     target_user_id uuid,
     feedback_date  timestamp,

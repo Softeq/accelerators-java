@@ -3,7 +3,13 @@ spring:
     url: r2dbc:postgresql://localhost:5432/postgres?currentSchema=flyway_accelerator
     username: postgres
     password: postgres
-
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    mongodb:
+      uri: mongodb://docker:mongopw@localhost:49153/test?authSource=admin
   flyway:
     user: postgres
     password: postgres
@@ -13,3 +19,18 @@ spring:
     placeholders:
       defaultUser: Admin
     repeatable-sql-migration-prefix: Repeatable
+logging:
+  level:
+    io:
+      reflectoring: DEBUG
+    org:
+      springframework:
+        web: INFO
+        data:
+          mongodb:
+            core:
+              ReactiveMongoTemplate: DEBUG
+    reactor:
+      netty:
+        http:
+          client: DEBUG

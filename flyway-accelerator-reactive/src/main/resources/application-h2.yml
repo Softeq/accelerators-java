@@ -1,0 +1,14 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb
+    username: sa
+    password:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    user: sa
+    password:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;
+    locations: classpath:db/h2migration

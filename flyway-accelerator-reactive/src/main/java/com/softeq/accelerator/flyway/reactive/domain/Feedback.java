@@ -7,43 +7,36 @@ package com.softeq.accelerator.flyway.reactive.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * Represents feedback from DB
+ * Feedback entity
  *
  * @author stitov
  */
-@Entity
 @Table
 @Getter
 @Setter
 public class Feedback {
 
     @Id
-    @GeneratedValue
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    private UUID userId;
+
+    @Transient
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "assessment_id")
-    private Assessment assessment;
+    private UUID targetUserId;
 
     private LocalDateTime feedbackDate;
 
-    private BigDecimal score;
+    private int score;
 
     private String comment;
 
